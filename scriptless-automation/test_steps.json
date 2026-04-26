@@ -1,30 +1,57 @@
-{
-    "testName": "Basic Login Flow",
-    "steps": [
-        {
-            "action": "navigate",
-            "url": "https://banking-automation-project.onrender.com/login"
-        },
-        {
-            "action": "input",
-            "locator_type": "id",
-            "locator_value": "username",
-            "data": "admin"
-        },
-        {
-            "action": "input",
-            "locator_type": "id",
-            "locator_value": "password",
-            "data": "password123"
-        },
-        {
-            "action": "click",
-            "locator_type": "id",
-            "locator_value": "login-btn"
-        },
-        {
-            "action": "verify_url",
-            "expected_url": "https://banking-automation-project.onrender.com/dashboard"
-        }
-    ]
-}
+[
+    {
+        "testName": "TC-01: Login - Positive Test (Valid Credentials)",
+        "steps": [
+            { "action": "navigate", "url": "https://banking-automation-project.onrender.com/login" },
+            { "action": "input", "locator_type": "id", "locator_value": "username", "data": "admin" },
+            { "action": "input", "locator_type": "id", "locator_value": "password", "data": "password123" },
+            { "action": "click", "locator_type": "id", "locator_value": "login-btn" },
+            { "action": "verify_url", "expected_url": "https://banking-automation-project.onrender.com/dashboard" }
+        ]
+    },
+    {
+        "testName": "TC-02: Login - Validation Test (Empty Input)",
+        "steps": [
+            { "action": "navigate", "url": "https://banking-automation-project.onrender.com/login" },
+            { "action": "input", "locator_type": "id", "locator_value": "username", "data": "" },
+            { "action": "input", "locator_type": "id", "locator_value": "password", "data": "" },
+            { "action": "click", "locator_type": "id", "locator_value": "login-btn" },
+            { "action": "verify_url_contains", "expected_fragment": "/login" }
+        ]
+    },
+    {
+        "testName": "TC-03: Login - Negative Test (Wrong Password)",
+        "steps": [
+            { "action": "navigate", "url": "https://banking-automation-project.onrender.com/login" },
+            { "action": "input", "locator_type": "id", "locator_value": "username", "data": "testuser" },
+            { "action": "input", "locator_type": "id", "locator_value": "password", "data": "wrongpass" },
+            { "action": "click", "locator_type": "id", "locator_value": "login-btn" },
+            { "action": "verify_url_contains", "expected_fragment": "/login" }
+        ]
+    },
+    {
+        "testName": "TC-04: Money Transfer - Positive Flow",
+        "steps": [
+            { "action": "navigate", "url": "https://banking-automation-project.onrender.com/login" },
+            { "action": "input", "locator_type": "id", "locator_value": "username", "data": "admin" },
+            { "action": "input", "locator_type": "id", "locator_value": "password", "data": "password123" },
+            { "action": "click", "locator_type": "id", "locator_value": "login-btn" },
+            { "action": "navigate", "url": "https://banking-automation-project.onrender.com/transfer" },
+            { "action": "input", "locator_type": "id", "locator_value": "receiver", "data": "receiverUser" },
+            { "action": "input", "locator_type": "id", "locator_value": "amount", "data": "10" },
+            { "action": "js_submit", "locator_type": "id", "locator_value": "transferForm" },
+            { "action": "verify_url_contains", "expected_fragment": "/dashboard" }
+        ]
+    },
+    {
+        "testName": "TC-05: Logout Functionality",
+        "steps": [
+            { "action": "navigate", "url": "https://banking-automation-project.onrender.com/login" },
+            { "action": "input", "locator_type": "id", "locator_value": "username", "data": "admin" },
+            { "action": "input", "locator_type": "id", "locator_value": "password", "data": "password123" },
+            { "action": "click", "locator_type": "id", "locator_value": "login-btn" },
+            { "action": "navigate", "url": "https://banking-automation-project.onrender.com/logout" },
+            { "action": "verify_url_contains", "expected_fragment": "/login" }
+        ]
+    }
+]

@@ -37,6 +37,11 @@ public class TransferSteps {
         driver.findElement(By.id("username")).sendKeys("testsender");
         driver.findElement(By.id("password")).sendKeys("pass");
         driver.findElement(By.id("login-btn")).click();
+        
+        // Wait until dashboard has loaded before proceeding
+        org.openqa.selenium.support.ui.WebDriverWait loginWait = 
+            new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(20));
+        loginWait.until(org.openqa.selenium.support.ui.ExpectedConditions.urlContains("/dashboard"));
     }
 
     @When("the user transfers {string} dollars to {string}")
@@ -45,7 +50,7 @@ public class TransferSteps {
         driver.get("https://banking-automation-project.onrender.com/transfer");
         
         // Wait for the transfer form to be visible
-        org.openqa.selenium.support.ui.WebDriverWait wait = new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(10));
+        org.openqa.selenium.support.ui.WebDriverWait wait = new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(20));
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated(By.id("receiver")));
         
         driver.findElement(By.id("receiver")).sendKeys(receiver);

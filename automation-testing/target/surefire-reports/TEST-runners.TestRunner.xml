@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="runners.TestRunner" time="19.724" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="runners.TestRunner" time="30.595" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,13 +15,14 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IN"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21.0.10\bin"/>
-    <property name="sun.java.command" value="C:\Users\shipa\AppData\Local\Temp\surefire11622823377644047632\surefirebooter-20260426142133461_3.jar C:\Users\shipa\AppData\Local\Temp\surefire11622823377644047632 2026-04-26T14-21-33_340-jvmRun1 surefire-20260426142133461_1tmp surefire_0-20260426142133461_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\shipa\AppData\Local\Temp\surefire7296767119400891455\surefirebooter-20260426164909039_3.jar C:\Users\shipa\AppData\Local\Temp\surefire7296767119400891455 2026-04-26T16-49-08_923-jvmRun1 surefire-20260426164909039_1tmp surefire_0-20260426164909039_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\projects\banking-app\automation-testing\target\test-classes;D:\projects\banking-app\automation-testing\target\classes;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-java\4.10.0\selenium-java-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-api\4.10.0\selenium-api-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-chrome-driver\4.10.0\selenium-chrome-driver-4.10.0.jar;C:\Users\shipa\.m2\repository\com\google\auto\service\auto-service-annotations\1.0.1\auto-service-annotations-1.0.1.jar;C:\Users\shipa\.m2\repository\com\google\auto\service\auto-service\1.0.1\auto-service-1.0.1.jar;C:\Users\shipa\.m2\repository\com\google\auto\auto-common\1.2\auto-common-1.2.jar;C:\Users\shipa\.m2\repository\com\google\guava\guava\31.1-jre\guava-31.1-jre.jar;C:\Users\shipa\.m2\repository\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar;C:\Users\shipa\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\shipa\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\shipa\.m2\repository\org\checkerframework\checker-qual\3.12.0\checker-qual-3.12.0.jar;C:\Users\shipa\.m2\repository\com\google\errorprone\error_prone_annotations\2.11.0\error_prone_annotations-2.11.0.jar;C:\Users\shipa\.m2\repository\com\google\j2objc\j2objc-annotations\1.3\j2objc-annotations-1.3.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-chromium-driver\4.10.0\selenium-chromium-driver-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-json\4.10.0\selenium-json-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-manager\4.10.0\selenium-manager-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v112\4.10.0\selenium-devtools-v112-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v113\4.10.0\selenium-devtools-v113-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v114\4.10.0\selenium-devtools-v114-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v85\4.10.0\selenium-devtools-v85-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-edge-driver\4.10.0\selenium-edge-driver-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-firefox-driver\4.10.0\selenium-firefox-driver-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-http\4.10.0\selenium-http-4.10.0.jar;C:\Users\shipa\.m2\repository\dev\failsafe\failsafe\3.3.1\failsafe-3.3.1.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-ie-driver\4.10.0\selenium-ie-driver-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-remote-driver\4.10.0\selenium-remote-driver-4.10.0.jar;C:\Users\shipa\.m2\repository\io\netty\netty-buffer\4.1.92.Final\netty-buffer-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-codec-http\4.1.92.Final\netty-codec-http-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-codec\4.1.92.Final\netty-codec-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-handler\4.1.92.Final\netty-handler-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-common\4.1.92.Final\netty-common-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.92.Final\netty-transport-classes-epoll-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport-classes-kqueue\4.1.92.Final\netty-transport-classes-kqueue-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport-native-epoll\4.1.92.Final\netty-transport-native-epoll-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport-native-kqueue\4.1.92.Final\netty-transport-native-kqueue-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.92.Final\netty-transport-native-unix-common-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport\4.1.92.Final\netty-transport-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-resolver\4.1.92.Final\netty-resolver-4.1.92.Final.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-api\1.26.0\opentelemetry-api-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-context\1.26.0\opentelemetry-context-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-exporter-logging\1.26.0\opentelemetry-exporter-logging-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-sdk-metrics\1.26.0\opentelemetry-sdk-metrics-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-extension-incubator\1.26.0-alpha\opentelemetry-extension-incubator-1.26.0-alpha.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-sdk-logs\1.26.0-alpha\opentelemetry-sdk-logs-1.26.0-alpha.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-api-logs\1.26.0-alpha\opentelemetry-api-logs-1.26.0-alpha.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-api-events\1.26.0-alpha\opentelemetry-api-events-1.26.0-alpha.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-sdk-common\1.26.0\opentelemetry-sdk-common-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure-spi\1.26.0\opentelemetry-sdk-extension-autoconfigure-spi-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure\1.26.0-alpha\opentelemetry-sdk-extension-autoconfigure-1.26.0-alpha.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-sdk-trace\1.26.0\opentelemetry-sdk-trace-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-sdk\1.26.0\opentelemetry-sdk-1.26.0.jar;C:\Users\shipa\.m2\repository\io\opentelemetry\opentelemetry-semconv\1.26.0-alpha\opentelemetry-semconv-1.26.0-alpha.jar;C:\Users\shipa\.m2\repository\net\bytebuddy\byte-buddy\1.14.4\byte-buddy-1.14.4.jar;C:\Users\shipa\.m2\repository\org\apache\commons\commons-exec\1.3\commons-exec-1.3.jar;C:\Users\shipa\.m2\repository\org\asynchttpclient\async-http-client\2.12.3\async-http-client-2.12.3.jar;C:\Users\shipa\.m2\repository\org\asynchttpclient\async-http-client-netty-utils\2.12.3\async-http-client-netty-utils-2.12.3.jar;C:\Users\shipa\.m2\repository\io\netty\netty-codec-socks\4.1.60.Final\netty-codec-socks-4.1.60.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-handler-proxy\4.1.60.Final\netty-handler-proxy-4.1.60.Final.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport-native-epoll\4.1.60.Final\netty-transport-native-epoll-4.1.60.Final-linux-x86_64.jar;C:\Users\shipa\.m2\repository\io\netty\netty-transport-native-kqueue\4.1.60.Final\netty-transport-native-kqueue-4.1.60.Final-osx-x86_64.jar;C:\Users\shipa\.m2\repository\org\reactivestreams\reactive-streams\1.0.3\reactive-streams-1.0.3.jar;C:\Users\shipa\.m2\repository\com\typesafe\netty\netty-reactive-streams\2.0.4\netty-reactive-streams-2.0.4.jar;C:\Users\shipa\.m2\repository\com\sun\activation\jakarta.activation\1.2.2\jakarta.activation-1.2.2.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-safari-driver\4.10.0\selenium-safari-driver-4.10.0.jar;C:\Users\shipa\.m2\repository\org\seleniumhq\selenium\selenium-support\4.10.0\selenium-support-4.10.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\cucumber-java\7.13.0\cucumber-java-7.13.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\cucumber-core\7.13.0\cucumber-core-7.13.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\cucumber-gherkin\7.13.0\cucumber-gherkin-7.13.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\cucumber-gherkin-messages\7.13.0\cucumber-gherkin-messages-7.13.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\gherkin\26.2.0\gherkin-26.2.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\messages\22.0.0\messages-22.0.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\tag-expressions\5.0.1\tag-expressions-5.0.1.jar;C:\Users\shipa\.m2\repository\io\cucumber\cucumber-expressions\16.1.2\cucumber-expressions-16.1.2.jar;C:\Users\shipa\.m2\repository\io\cucumber\datatable\7.13.0\datatable-7.13.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\cucumber-plugin\7.13.0\cucumber-plugin-7.13.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\docstring\7.13.0\docstring-7.13.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\html-formatter\20.3.1\html-formatter-20.3.1.jar;C:\Users\shipa\.m2\repository\io\cucumber\junit-xml-formatter\0.2.0\junit-xml-formatter-0.2.0.jar;C:\Users\shipa\.m2\repository\io\cucumber\ci-environment\9.2.0\ci-environment-9.2.0.jar;C:\Users\shipa\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\shipa\.m2\repository\io\cucumber\cucumber-junit\7.13.0\cucumber-junit-7.13.0.jar;C:\Users\shipa\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\shipa\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\shipa\.m2\repository\io\github\bonigarcia\webdrivermanager\5.5.3\webdrivermanager-5.5.3.jar;C:\Users\shipa\.m2\repository\org\slf4j\slf4j-api\2.0.7\slf4j-api-2.0.7.jar;C:\Users\shipa\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\shipa\.m2\repository\com\github\docker-java\docker-java\3.3.3\docker-java-3.3.3.jar;C:\Users\shipa\.m2\repository\com\github\docker-java\docker-java-core\3.3.3\docker-java-core-3.3.3.jar;C:\Users\shipa\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\shipa\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\shipa\.m2\repository\commons-io\commons-io\2.6\commons-io-2.6.jar;C:\Users\shipa\.m2\repository\org\apache\commons\commons-compress\1.21\commons-compress-1.21.jar;C:\Users\shipa\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.10.3\jackson-databind-2.10.3.jar;C:\Users\shipa\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.10.3\jackson-core-2.10.3.jar;C:\Users\shipa\.m2\repository\org\bouncycastle\bcpkix-jdk18on\1.75\bcpkix-jdk18on-1.75.jar;C:\Users\shipa\.m2\repository\org\bouncycastle\bcprov-jdk18on\1.75\bcprov-jdk18on-1.75.jar;C:\Users\shipa\.m2\repository\org\bouncycastle\bcutil-jdk18on\1.75\bcutil-jdk18on-1.75.jar;C:\Users\shipa\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.30\jcl-over-slf4j-1.7.30.jar;C:\Users\shipa\.m2\repository\com\github\docker-java\docker-java-transport-httpclient5\3.3.3\docker-java-transport-httpclient5-3.3.3.jar;C:\Users\shipa\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\shipa\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\shipa\.m2\repository\org\brotli\dec\0.1.2\dec-0.1.2.jar;C:\Users\shipa\.m2\repository\org\apache\commons\commons-lang3\3.13.0\commons-lang3-3.13.0.jar;C:\Users\shipa\.m2\repository\org\apache\httpcomponents\client5\httpclient5\5.2.1\httpclient5-5.2.1.jar;C:\Users\shipa\.m2\repository\org\apache\httpcomponents\core5\httpcore5\5.2\httpcore5-5.2.jar;C:\Users\shipa\.m2\repository\org\apache\httpcomponents\core5\httpcore5-h2\5.2\httpcore5-h2-5.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\shipa"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.useFile" value="false"/>
     <property name="java.version.date" value="2026-01-20"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-21.0.10"/>
     <property name="file.separator" value="\"/>
@@ -30,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\shipa\AppData\Local\Temp\surefire11622823377644047632\surefirebooter-20260426142133461_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\shipa\AppData\Local\Temp\surefire7296767119400891455\surefirebooter-20260426164909039_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.10+8-LTS-217"/>
@@ -50,7 +51,7 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-21.0.10\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk-21\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;D:\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.15\bin;C:\Users\shipa\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\shipa\AppData\Local\Programs\Python\Python311\;C:\Users\shipa\AppData\Local\Microsoft\WindowsApps;D:\Microsoft VS Code\bin;C:\Users\shipa\AppData\Roaming\npm;C:\Users\shipa\AppData\Local\Python\bin;D:\Antigravity\bin;D:\cursor\resources\app\bin;D:\PyCharm 2025.3.3\bin;c:\Users\shipa\.antigravity\extensions\ms-python.debugpy-2025.18.0-win32-x64\bundled\scripts\noConfigScriptsc:\Users\shipa\.antigravity\extensions\vscjava.vscode-java-debug-0.59.0-universal\bundled\scripts\noConfigScripts;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-21.0.10\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk-21\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;D:\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.15\bin;C:\Users\shipa\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\shipa\AppData\Local\Programs\Python\Python311\;C:\Users\shipa\AppData\Local\Microsoft\WindowsApps;D:\Microsoft VS Code\bin;C:\Users\shipa\AppData\Roaming\npm;C:\Users\shipa\AppData\Local\Python\bin;D:\Antigravity\bin;D:\cursor\resources\app\bin;D:\PyCharm 2025.3.3\bin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Oracle Corporation"/>
@@ -58,68 +59,102 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="Successful login with valid credentials" classname="Bank Login Functionality" time="4.117">
+  <testcase name="Successful login with valid credentials" classname="Bank Login Functionality" time="5.353">
     <system-out><![CDATA[
-Scenario: Successful login with valid credentials                     # src/test/resources/features/login.feature:3
-  Given the user is on the login page                                 # stepDefinitions.LoginSteps.theUserIsOnTheLoginPage()
-  When the user enters username "testuser" and password "password123" # stepDefinitions.LoginSteps.theUserEntersUsernameAndPassword(java.lang.String,java.lang.String)
-  And clicks on the login button                                      # stepDefinitions.LoginSteps.clicksOnTheLoginButton()
-  Then the user should be redirected to the dashboard                 # stepDefinitions.LoginSteps.theUserShouldBeRedirectedToTheDashboard()
+Scenario: Successful login with valid credentials                  # src/test/resources/features/login.feature:7
+  Given the user is on the login page                              # stepDefinitions.LoginSteps.theUserIsOnTheLoginPage()
+  When the user enters username "admin" and password "password123" # stepDefinitions.LoginSteps.theUserEntersUsernameAndPassword(java.lang.String,java.lang.String)
+  And clicks on the login button                                   # stepDefinitions.LoginSteps.clicksOnTheLoginButton()
+  Then the user should be redirected to the dashboard              # stepDefinitions.LoginSteps.theUserShouldBeRedirectedToTheDashboard()
 ]]></system-out>
     <system-err><![CDATA[SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-Apr 26, 2026 2:21:34 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
+Apr 26, 2026 4:49:10 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
 INFO: Driver logs no longer sent to console by default; https://www.selenium.dev/documentation/webdriver/drivers/service/#setting-log-output
-Apr 26, 2026 2:21:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Apr 26, 2026 4:49:11 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 147
-Apr 26, 2026 2:21:35 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+Apr 26, 2026 4:49:11 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
 WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.10.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
-  <testcase name="Unsuccessful login with invalid credentials" classname="Bank Login Functionality" time="2.973">
+  <testcase name="Login with empty username and password" classname="Bank Login Functionality" time="2.608">
     <system-out><![CDATA[
-Scenario: Unsuccessful login with invalid credentials                      # src/test/resources/features/login.feature:9
+Scenario: Login with empty username and password   # src/test/resources/features/login.feature:14
+  Given the user is on the login page              # stepDefinitions.LoginSteps.theUserIsOnTheLoginPage()
+  When the user enters username "" and password "" # stepDefinitions.LoginSteps.theUserEntersUsernameAndPassword(java.lang.String,java.lang.String)
+  And clicks on the login button                   # stepDefinitions.LoginSteps.clicksOnTheLoginButton()
+  Then the user should remain on the login page    # stepDefinitions.LoginSteps.theUserShouldRemainOnTheLoginPage()
+]]></system-out>
+    <system-err><![CDATA[Apr 26, 2026 4:49:15 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
+INFO: Driver logs no longer sent to console by default; https://www.selenium.dev/documentation/webdriver/drivers/service/#setting-log-output
+Apr 26, 2026 4:49:16 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 147
+Apr 26, 2026 4:49:16 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.10.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+]]></system-err>
+  </testcase>
+  <testcase name="Login with invalid credentials" classname="Bank Login Functionality" time="3.969">
+    <system-out><![CDATA[
+Scenario: Login with invalid credentials                                   # src/test/resources/features/login.feature:21
   Given the user is on the login page                                      # stepDefinitions.LoginSteps.theUserIsOnTheLoginPage()
-  When the user enters username "invaliduser" and password "wrongpass"     # stepDefinitions.LoginSteps.theUserEntersUsernameAndPassword(java.lang.String,java.lang.String)
+  When the user enters username "testuser" and password "wrongpass"        # stepDefinitions.LoginSteps.theUserEntersUsernameAndPassword(java.lang.String,java.lang.String)
   And clicks on the login button                                           # stepDefinitions.LoginSteps.clicksOnTheLoginButton()
   Then an error message "Invalid username or password" should be displayed # stepDefinitions.LoginSteps.anErrorMessageShouldBeDisplayed(java.lang.String)
 ]]></system-out>
-    <system-err><![CDATA[Apr 26, 2026 2:21:38 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
+    <system-err><![CDATA[Apr 26, 2026 4:49:17 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
 INFO: Driver logs no longer sent to console by default; https://www.selenium.dev/documentation/webdriver/drivers/service/#setting-log-output
-Apr 26, 2026 2:21:38 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Apr 26, 2026 4:49:18 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 147
-Apr 26, 2026 2:21:38 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+Apr 26, 2026 4:49:18 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
 WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.10.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
-  <testcase name="Successful money transfer" classname="Money Transfer Functionality" time="6.012">
+  <testcase name="User can log out of the application" classname="Bank Login Functionality" time="4.391">
     <system-out><![CDATA[
-Scenario: Successful money transfer                                # src/test/resources/features/transfer.feature:6
+Scenario: User can log out of the application                      # src/test/resources/features/login.feature:28
+  Given the user is on the login page                              # stepDefinitions.LoginSteps.theUserIsOnTheLoginPage()
+  When the user enters username "admin" and password "password123" # stepDefinitions.LoginSteps.theUserEntersUsernameAndPassword(java.lang.String,java.lang.String)
+  And clicks on the login button                                   # stepDefinitions.LoginSteps.clicksOnTheLoginButton()
+  Then the user should be redirected to the dashboard              # stepDefinitions.LoginSteps.theUserShouldBeRedirectedToTheDashboard()
+  And the user clicks the logout button                            # stepDefinitions.LoginSteps.theUserClicksTheLogoutButton()
+  Then the user should be redirected to the login page             # stepDefinitions.LoginSteps.theUserShouldBeRedirectedToTheLoginPage()
+]]></system-out>
+    <system-err><![CDATA[Apr 26, 2026 4:49:21 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
+INFO: Driver logs no longer sent to console by default; https://www.selenium.dev/documentation/webdriver/drivers/service/#setting-log-output
+Apr 26, 2026 4:49:22 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 147
+Apr 26, 2026 4:49:22 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.10.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+]]></system-err>
+  </testcase>
+  <testcase name="Successful money transfer to valid recipient" classname="Money Transfer Functionality" time="6.232">
+    <system-out><![CDATA[
+Scenario: Successful money transfer to valid recipient             # src/test/resources/features/transfer.feature:10
   Given the user is logged into the dashboard                      # stepDefinitions.TransferSteps.theUserIsLoggedIntoTheDashboard()
-  When the user transfers "50" dollars to "receiverUser"           # stepDefinitions.TransferSteps.theUserTransfersDollarsTo(java.lang.String,java.lang.String)
+  When the user transfers "10" dollars to "receiverUser"           # stepDefinitions.TransferSteps.theUserTransfersDollarsTo(java.lang.String,java.lang.String)
   Then a success message "Transfer successful" should be displayed # stepDefinitions.TransferSteps.aSuccessMessageShouldBeDisplayed(java.lang.String)
 ]]></system-out>
-    <system-err><![CDATA[Apr 26, 2026 2:21:41 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
+    <system-err><![CDATA[Apr 26, 2026 4:49:26 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
 INFO: Driver logs no longer sent to console by default; https://www.selenium.dev/documentation/webdriver/drivers/service/#setting-log-output
-Apr 26, 2026 2:21:41 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Apr 26, 2026 4:49:26 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 147
-Apr 26, 2026 2:21:41 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+Apr 26, 2026 4:49:26 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
 WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.10.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
-  <testcase name="Unsuccessful transfer due to insufficient balance" classname="Money Transfer Functionality" time="6.167">
+  <testcase name="Transfer fails due to insufficient balance" classname="Money Transfer Functionality" time="7.485">
     <system-out><![CDATA[
-Scenario: Unsuccessful transfer due to insufficient balance                     # src/test/resources/features/transfer.feature:10
+Scenario: Transfer fails due to insufficient balance                            # src/test/resources/features/transfer.feature:15
   Given the user is logged into the dashboard                                   # stepDefinitions.TransferSteps.theUserIsLoggedIntoTheDashboard()
   When the user transfers "50000" dollars to "receiverUser"                     # stepDefinitions.TransferSteps.theUserTransfersDollarsTo(java.lang.String,java.lang.String)
   Then an error message "Insufficient balance" should be displayed on dashboard # stepDefinitions.TransferSteps.anErrorMessageShouldBeDisplayedOnDashboard(java.lang.String)
 ]]></system-out>
-    <system-err><![CDATA[Apr 26, 2026 2:21:47 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
+    <system-err><![CDATA[Apr 26, 2026 4:49:32 PM org.openqa.selenium.remote.service.DriverService$Builder getLogOutput
 INFO: Driver logs no longer sent to console by default; https://www.selenium.dev/documentation/webdriver/drivers/service/#setting-log-output
-Apr 26, 2026 2:21:47 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Apr 26, 2026 4:49:33 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 147
-Apr 26, 2026 2:21:47 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
+Apr 26, 2026 4:49:33 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
 WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.10.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
