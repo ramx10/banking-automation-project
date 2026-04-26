@@ -31,18 +31,17 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
     const { username, password } = req.body;
-    
-    // Basic validation
+
     if (!username || !password) {
         return res.render('register', { error: 'Username and password are required' });
     }
 
-    db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, password], function(err) {
-        if (err) {
-            return res.render('register', { error: 'Username already exists' });
-        }
+    try {
+        db.prepare('INSERT INTO users (username, password) VALUES (?, ?)').run(username, password);
         res.redirect('/login');
-    });
+    } catch (err) {
+        res.render('register', { error: 'Username already exists' });
+    }
 });
 
 app.get('/login', (req, res) => {
@@ -51,15 +50,12 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    
-    // INSECURE LOGIN FOR SECURITY TESTING (Intentionally vulnerable to simple SQLi for academic purposes)
-    // We will use string interpolation to allow ' OR 1=1 --
-    const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
-    
-    db.get(query, (err, user) => {
-        if (err) {
-            return res.render('login', { error: 'Database error' });
-        }
+
+    // INSECURE LOGIN FOR SECURITY TESTING (Intentionally vulnerable to SQLi for academic purposes)
+    try {
+        const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+        const user = db.prepare(query).get();
+
         if (user) {
             req.session.userId = user.id;
             req.session.username = user.username;
@@ -67,36 +63,37 @@ app.post('/login', (req, res) => {
         } else {
             res.render('login', { error: 'Invalid username or password' });
         }
-    });
+    } catch (err) {
+        res.render('login', { error: 'Database error' });
+    }
 });
 
 app.get('/dashboard', (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/login');
-    }
+    if (!req.session.userId) return res.redirect('/login');
 
-    db.get('SELECT * FROM users WHERE id = ?', [req.session.userId], (err, user) => {
-        if (err || !user) {
-            return res.redirect('/login');
-        }
-        
-        db.all('SELECT * FROM transactions WHERE sender_id = ? OR receiver_username = ? ORDER BY timestamp DESC', [user.id, user.username], (err, transactions) => {
-            res.render('dashboard', { 
-                username: user.username, 
-                balance: user.balance,
-                transactions: transactions || [],
-                error: req.query.error,
-                success: req.query.success
-            });
+    try {
+        const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.session.userId);
+        if (!user) return res.redirect('/login');
+
+        const transactions = db.prepare(
+            'SELECT * FROM transactions WHERE sender_id = ? OR receiver_username = ? ORDER BY timestamp DESC'
+        ).all(user.id, user.username);
+
+        res.render('dashboard', {
+            username: user.username,
+            balance: user.balance,
+            transactions: transactions || [],
+            error: req.query.error,
+            success: req.query.success
         });
-    });
+    } catch (err) {
+        res.redirect('/login');
+    }
 });
 
 app.get('/transfer', (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/login');
-    }
-    res.render('transfer', { 
+    if (!req.session.userId) return res.redirect('/login');
+    res.render('transfer', {
         username: req.session.username,
         error: req.query.error,
         success: req.query.success
@@ -104,9 +101,7 @@ app.get('/transfer', (req, res) => {
 });
 
 app.post('/transfer', (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/login');
-    }
+    if (!req.session.userId) return res.redirect('/login');
 
     const { receiver, amount } = req.body;
     const transferAmount = parseFloat(amount);
@@ -116,52 +111,53 @@ app.post('/transfer', (req, res) => {
     }
 
     if (receiver === req.session.username) {
-         return res.redirect('/transfer?error=Cannot transfer to yourself');
+        return res.redirect('/transfer?error=Cannot transfer to yourself');
     }
 
-    db.get('SELECT * FROM users WHERE id = ?', [req.session.userId], (err, sender) => {
+    try {
+        const sender = db.prepare('SELECT * FROM users WHERE id = ?').get(req.session.userId);
         if (sender.balance < transferAmount) {
             return res.redirect('/transfer?error=Insufficient balance');
         }
 
-        db.get('SELECT * FROM users WHERE username = ?', [receiver], (err, receiverUser) => {
-            if (!receiverUser) {
-                return res.redirect('/transfer?error=Receiver not found');
-            }
+        const receiverUser = db.prepare('SELECT * FROM users WHERE username = ?').get(receiver);
+        if (!receiverUser) {
+            return res.redirect('/transfer?error=Receiver not found');
+        }
 
-            // Perform transfer
-            db.serialize(() => {
-                db.run('BEGIN TRANSACTION');
-                db.run('UPDATE users SET balance = balance - ? WHERE id = ?', [transferAmount, sender.id]);
-                db.run('UPDATE users SET balance = balance + ? WHERE id = ?', [transferAmount, receiverUser.id]);
-                db.run('INSERT INTO transactions (sender_id, receiver_username, amount) VALUES (?, ?, ?)', [sender.id, receiver, transferAmount]);
-                db.run('COMMIT', (err) => {
-                    if (err) {
-                        return res.redirect('/transfer?error=Transfer failed');
-                    }
-                    res.redirect('/dashboard?success=Transfer successful');
-                });
-            });
+        // Perform transfer atomically
+        const transfer = db.transaction(() => {
+            db.prepare('UPDATE users SET balance = balance - ? WHERE id = ?').run(transferAmount, sender.id);
+            db.prepare('UPDATE users SET balance = balance + ? WHERE id = ?').run(transferAmount, receiverUser.id);
+            db.prepare('INSERT INTO transactions (sender_id, receiver_username, amount) VALUES (?, ?, ?)').run(sender.id, receiver, transferAmount);
         });
-    });
+        transfer();
+
+        res.redirect('/dashboard?success=Transfer successful');
+    } catch (err) {
+        res.redirect('/transfer?error=Transfer failed');
+    }
 });
 
 app.get('/loans', (req, res) => {
     if (!req.session.userId) return res.redirect('/login');
 
-    db.get('SELECT * FROM users WHERE id = ?', [req.session.userId], (err, user) => {
-        if (err || !user) return res.redirect('/login');
-        
-        db.all('SELECT * FROM loans WHERE user_id = ? ORDER BY timestamp DESC', [user.id], (err, loans) => {
-            res.render('loans', { 
-                username: user.username, 
-                balance: user.balance,
-                loans: loans || [],
-                error: req.query.error,
-                success: req.query.success
-            });
+    try {
+        const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.session.userId);
+        if (!user) return res.redirect('/login');
+
+        const loans = db.prepare('SELECT * FROM loans WHERE user_id = ? ORDER BY timestamp DESC').all(user.id);
+
+        res.render('loans', {
+            username: user.username,
+            balance: user.balance,
+            loans: loans || [],
+            error: req.query.error,
+            success: req.query.success
         });
-    });
+    } catch (err) {
+        res.redirect('/dashboard');
+    }
 });
 
 app.post('/loan/apply', (req, res) => {
@@ -175,16 +171,18 @@ app.post('/loan/apply', (req, res) => {
     const userId = req.session.userId;
     const username = req.session.username;
 
-    db.serialize(() => {
-        db.run('BEGIN TRANSACTION');
-        db.run('UPDATE users SET balance = balance + ? WHERE id = ?', [amount, userId]);
-        db.run('INSERT INTO loans (user_id, amount, status) VALUES (?, ?, ?)', [userId, amount, 'unpaid']);
-        db.run('INSERT INTO transactions (sender_id, receiver_username, amount) VALUES (NULL, ?, ?)', [username, amount]);
-        db.run('COMMIT', (err) => {
-            if (err) return res.redirect('/loans?error=Loan application failed');
-            res.redirect('/loans?success=Loan approved and funds added to your balance!');
+    try {
+        const applyLoan = db.transaction(() => {
+            db.prepare('UPDATE users SET balance = balance + ? WHERE id = ?').run(amount, userId);
+            db.prepare('INSERT INTO loans (user_id, amount, status) VALUES (?, ?, ?)').run(userId, amount, 'unpaid');
+            db.prepare('INSERT INTO transactions (sender_id, receiver_username, amount) VALUES (NULL, ?, ?)').run(username, amount);
         });
-    });
+        applyLoan();
+
+        res.redirect('/loans?success=Loan approved and funds added to your balance!');
+    } catch (err) {
+        res.redirect('/loans?error=Loan application failed');
+    }
 });
 
 app.post('/loan/pay', (req, res) => {
@@ -193,26 +191,26 @@ app.post('/loan/pay', (req, res) => {
     const loanId = parseInt(req.body.loan_id);
     const userId = req.session.userId;
 
-    db.get('SELECT * FROM loans WHERE id = ? AND user_id = ? AND status = ?', [loanId, userId, 'unpaid'], (err, loan) => {
-        if (err || !loan) return res.redirect('/loans?error=Invalid loan or already paid');
+    try {
+        const loan = db.prepare('SELECT * FROM loans WHERE id = ? AND user_id = ? AND status = ?').get(loanId, userId, 'unpaid');
+        if (!loan) return res.redirect('/loans?error=Invalid loan or already paid');
 
-        db.get('SELECT balance FROM users WHERE id = ?', [userId], (err, user) => {
-            if (user.balance < loan.amount) {
-                return res.redirect('/loans?error=Insufficient balance to pay off this loan');
-            }
+        const user = db.prepare('SELECT balance FROM users WHERE id = ?').get(userId);
+        if (user.balance < loan.amount) {
+            return res.redirect('/loans?error=Insufficient balance to pay off this loan');
+        }
 
-            db.serialize(() => {
-                db.run('BEGIN TRANSACTION');
-                db.run('UPDATE users SET balance = balance - ? WHERE id = ?', [loan.amount, userId]);
-                db.run('UPDATE loans SET status = ? WHERE id = ?', ['paid', loanId]);
-                db.run('INSERT INTO transactions (sender_id, receiver_username, amount) VALUES (?, ?, ?)', [userId, 'Bank (Loan Repayment)', loan.amount]);
-                db.run('COMMIT', (err) => {
-                    if (err) return res.redirect('/loans?error=Payment failed');
-                    res.redirect('/loans?success=Loan paid successfully!');
-                });
-            });
+        const payLoan = db.transaction(() => {
+            db.prepare('UPDATE users SET balance = balance - ? WHERE id = ?').run(loan.amount, userId);
+            db.prepare('UPDATE loans SET status = ? WHERE id = ?').run('paid', loanId);
+            db.prepare('INSERT INTO transactions (sender_id, receiver_username, amount) VALUES (?, ?, ?)').run(userId, 'Bank (Loan Repayment)', loan.amount);
         });
-    });
+        payLoan();
+
+        res.redirect('/loans?success=Loan paid successfully!');
+    } catch (err) {
+        res.redirect('/loans?error=Payment failed');
+    }
 });
 
 app.get('/logout', (req, res) => {
