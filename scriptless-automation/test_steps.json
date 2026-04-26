@@ -3,7 +3,7 @@
     "steps": [
         {
             "action": "navigate",
-            "url": "http://localhost:3000/login"
+            "url": "https://banking-automation-project.onrender.com/login"
         },
         {
             "action": "input",
@@ -24,7 +24,7 @@
         },
         {
             "action": "verify_url",
-            "expected_url": "http://localhost:3000/dashboard"
+            "expected_url": "https://banking-automation-project.onrender.com/dashboard"
         }
     ]
 }

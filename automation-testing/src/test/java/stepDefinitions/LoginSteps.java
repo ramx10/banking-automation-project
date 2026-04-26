@@ -31,7 +31,7 @@ public class LoginSteps {
 
     @Given("the user is on the login page")
     public void theUserIsOnTheLoginPage() {
-        driver.get("http://localhost:3000/login");
+        driver.get("https://banking-automation-project.onrender.com/login");
     }
 
     @When("the user enters username {string} and password {string}")

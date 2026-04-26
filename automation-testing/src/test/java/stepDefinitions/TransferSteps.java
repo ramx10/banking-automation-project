@@ -22,18 +22,18 @@ public class TransferSteps {
         }
         
         // Register a test user
-        driver.get("http://localhost:3000/register");
+        driver.get("https://banking-automation-project.onrender.com/register");
         driver.findElement(By.id("username")).sendKeys("testsender");
         driver.findElement(By.id("password")).sendKeys("pass");
         driver.findElement(By.id("register-btn")).click();
         
-        driver.get("http://localhost:3000/register");
+        driver.get("https://banking-automation-project.onrender.com/register");
         driver.findElement(By.id("username")).sendKeys("receiverUser");
         driver.findElement(By.id("password")).sendKeys("pass");
         driver.findElement(By.id("register-btn")).click();
 
         // Login as the sender
-        driver.get("http://localhost:3000/login");
+        driver.get("https://banking-automation-project.onrender.com/login");
         driver.findElement(By.id("username")).sendKeys("testsender");
         driver.findElement(By.id("password")).sendKeys("pass");
         driver.findElement(By.id("login-btn")).click();

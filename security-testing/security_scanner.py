@@ -48,7 +48,7 @@ def test_xss(url):
 
 
 if __name__ == "__main__":
-    base_url = "http://localhost:3000"
+    base_url = "https://banking-automation-project.onrender.com"
     
     print("Starting Automated Security Tests...")
     # Test SQLi on login
