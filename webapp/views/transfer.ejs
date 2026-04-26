@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank - Transfer Money</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 for beautiful popups -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <i class="fa-solid fa-building-columns"></i> AI Bank
+            </div>
+            <div class="navbar-menu">
+                <a href="/dashboard" class="link" style="margin: 0; margin-right: 15px; text-decoration: none; color: var(--text-main); font-weight: 600;"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="/loans" class="link" style="margin: 0; text-decoration: none; color: var(--text-main); font-weight: 600;"><i class="fa-solid fa-file-invoice-dollar"></i> Loans</a>
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="card" style="max-width: 500px; margin: 0 auto;">
+            <div class="card-header">
+                <h3><i class="fa-solid fa-money-bill-transfer"></i> Transfer Money</h3>
+            </div>
+            
+            <form id="transferForm" action="/transfer" method="POST">
+                <div class="form-group">
+                    <label for="receiver">Recipient Username</label>
+                    <input type="text" id="receiver" name="receiver" placeholder="e.g. john_doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount ($)</label>
+                    <input type="number" step="0.01" id="amount" name="amount" placeholder="0.00" required>
+                </div>
+                <button type="submit" class="btn-primary" id="transfer-btn">
+                    <span class="spinner"></span>
+                    <span class="btn-text">Send Money</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Inject Server Errors via SweetAlert -->
+    <% if (typeof error !== 'undefined' && error) { %>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Transfer Failed',
+                text: '<%= error %>',
+                confirmButtonColor: '#2563eb'
+            });
+        </script>
+    <% } %>
+
+    <script>
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Form Submission Logic
+        const form = document.getElementById('transferForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const receiver = document.getElementById('receiver').value.trim();
+            const amount = document.getElementById('amount').value.trim();
+
+            if (!receiver || !amount) {
+                Swal.fire('Error', 'Please fill in all fields', 'error');
+                return;
+            }
+
+            // Confirmation Popup
+            Swal.fire({
+                title: 'Confirm Transfer',
+                text: `Are you sure you want to send $${amount} to ${receiver}?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#2563eb',
+                cancelButtonColor: '#ef4444',
+                confirmButtonText: 'Yes, send it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Show loading state
+                    const btn = document.getElementById('transfer-btn');
+                    btn.classList.add('loading');
+                    btn.disabled = true;
+                    // Submit the form
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

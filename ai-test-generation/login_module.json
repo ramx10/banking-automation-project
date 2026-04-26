@@ -1,0 +1,19 @@
+{
+    "moduleName": "Login Page",
+    "fields": [
+        {
+            "name": "username",
+            "type": "string",
+            "required": true,
+            "minLength": 4,
+            "maxLength": 20
+        },
+        {
+            "name": "password",
+            "type": "string",
+            "required": true,
+            "minLength": 8,
+            "maxLength": 30
+        }
+    ]
+}

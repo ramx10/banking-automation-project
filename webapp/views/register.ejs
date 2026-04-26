@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank - Register</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <h2><i class="fa-solid fa-user-plus" style="color: var(--primary-blue);"></i> Create Account</h2>
+        
+        <% if (error) { %>
+            <div class="alert error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <%= error %>
+            </div>
+        <% } %>
+        
+        <form id="registerForm" action="/register" method="POST">
+            <div class="form-group">
+                <label for="username">Choose Username</label>
+                <input type="text" id="username" name="username" placeholder="e.g. jane_doe" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Choose Password</label>
+                <input type="password" id="password" name="password" placeholder="At least 6 characters" required minlength="6">
+                <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
+            </div>
+            
+            <button type="submit" class="btn-primary" id="register-btn">
+                <span class="spinner"></span>
+                <span class="btn-text">Register Now</span>
+            </button>
+        </form>
+        
+        <a href="/login" class="link">Already have an account? Login here.</a>
+    </div>
+
+    <script>
+        // Password Show/Hide Toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Form Validation & Loading State
+        const form = document.getElementById('registerForm');
+        form.addEventListener('submit', function(e) {
+            const userVal = document.getElementById('username').value.trim();
+            const passVal = password.value.trim();
+
+            if (!userVal || !passVal) {
+                e.preventDefault();
+                alert('Please enter both username and password.');
+                return;
+            }
+
+            if (passVal.length < 6) {
+                e.preventDefault();
+                alert('Password must be at least 6 characters long.');
+                return;
+            }
+
+            // Show Loading Indicator
+            const btn = document.getElementById('register-btn');
+            btn.classList.add('loading');
+            btn.disabled = true;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank - Loans</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <i class="fa-solid fa-building-columns"></i> AI Bank
+            </div>
+            <div class="navbar-menu">
+                <a href="/dashboard" class="link" style="margin: 0;"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <span style="font-weight: 500;">Hello, <%= username %></span>
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <form action="/logout" method="GET" style="margin: 0;">
+                    <button type="submit" class="btn-outline btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                </form>
+            </div>
+        </nav>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Outstanding Debt & Apply -->
+            <div>
+                <% 
+                    let totalDebt = 0;
+                    if (loans && loans.length > 0) {
+                        loans.forEach(loan => {
+                            if (loan.status === 'unpaid') totalDebt += loan.amount;
+                        });
+                    }
+                %>
+                <!-- Debt Card -->
+                <div class="card balance-card" style="margin-bottom: 30px; background: linear-gradient(135deg, #ef4444, #f87171);">
+                    <p>Total Outstanding Debt</p>
+                    <h1>$<%= totalDebt.toFixed(2) %></h1>
+                    <p style="font-size: 12px; opacity: 0.8;">Available Balance: $<%= balance.toFixed(2) %></p>
+                </div>
+
+                <!-- Apply for Loan Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-hand-holding-dollar"></i> Apply for a Loan</h3>
+                    </div>
+                    <form id="loanApplyForm" action="/loan/apply" method="POST">
+                        <div class="form-group">
+                            <label for="amount">Requested Amount ($)</label>
+                            <input type="number" step="0.01" id="amount" name="amount" placeholder="e.g. 1000" required>
+                        </div>
+                        <button type="submit" class="btn-primary" id="apply-btn">
+                            <span class="spinner"></span>
+                            <span class="btn-text">Request Loan</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column: Loans List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-file-invoice-dollar"></i> Your Loans</h3>
+                </div>
+                
+                <div class="transactions-list">
+                    <% if (loans && loans.length > 0) { %>
+                        <% loans.forEach(function(loan) { %>
+                            <div class="transaction-item" style="flex-wrap: wrap;">
+                                <div class="tx-info">
+                                    <div class="tx-icon <%= loan.status === 'unpaid' ? 'sent' : 'received' %>">
+                                        <i class="fa-solid <%= loan.status === 'unpaid' ? 'fa-clock' : 'fa-check' %>"></i>
+                                    </div>
+                                    <div class="tx-details">
+                                        <p>Loan #<%= loan.id %></p>
+                                        <span><%= new Date(loan.timestamp).toLocaleString() %></span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="tx-amount <%= loan.status === 'unpaid' ? 'sent' : 'received' %>">
+                                        $<%= loan.amount.toFixed(2) %>
+                                    </div>
+                                    <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;"><%= loan.status %></span>
+                                </div>
+                                
+                                <% if (loan.status === 'unpaid') { %>
+                                    <form action="/loan/pay" method="POST" style="width: 100%; margin-top: 10px; display: flex; justify-content: flex-end;" onsubmit="return confirmPay(event, this, <%= loan.amount %>, <%= balance %>)">
+                                        <input type="hidden" name="loan_id" value="<%= loan.id %>">
+                                        <button type="submit" class="btn-outline" style="font-size: 12px; padding: 5px 10px;">Pay Off</button>
+                                    </form>
+                                <% } %>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p style="color: var(--text-muted); text-align: center; padding: 20px 0;">No loans active.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Handling -->
+    <% if (typeof success !== 'undefined' && success) { %>
+        <script>
+            Swal.fire({ icon: 'success', title: 'Success', text: '<%= success %>', timer: 3000, showConfirmButton: false });
+        </script>
+    <% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+        <script>
+            Swal.fire({ icon: 'error', title: 'Error', text: '<%= error %>', confirmButtonColor: '#2563eb' });
+        </script>
+    <% } %>
+
+    <script>
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Apply Loan Confirm
+        const applyForm = document.getElementById('loanApplyForm');
+        applyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const amount = document.getElementById('amount').value;
+            if(!amount) return;
+            
+            Swal.fire({
+                title: 'Confirm Loan Request',
+                text: `Are you sure you want to take a loan of $${amount}? This will instantly increase your balance and outstanding debt.`,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#2563eb',
+                cancelButtonColor: '#ef4444',
+                confirmButtonText: 'Yes, apply now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const btn = document.getElementById('apply-btn');
+                    btn.classList.add('loading');
+                    btn.disabled = true;
+                    applyForm.submit();
+                }
+            });
+        });
+
+        // Pay Loan Confirm
+        function confirmPay(e, form, amount, balance) {
+            e.preventDefault();
+            if (balance < amount) {
+                Swal.fire('Error', 'Insufficient balance to pay off this loan.', 'error');
+                return false;
+            }
+            
+            Swal.fire({
+                title: 'Confirm Payment',
+                text: `Pay off $${amount} loan using your available balance?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#10b981',
+                cancelButtonColor: '#ef4444',
+                confirmButtonText: 'Yes, pay it off!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+            return false;
+        }
+    </script>
+</body>
+</html>

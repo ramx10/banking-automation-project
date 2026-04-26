@@ -1,0 +1,51 @@
+[
+    {
+        "type": "Valid (Happy Path)",
+        "inputs": {
+            "username": "4aY6IJ",
+            "password": "z1cR3tJwsf"
+        }
+    },
+    {
+        "type": "Invalid (Missing username)",
+        "inputs": {
+            "username": "",
+            "password": "rbWp1fmi"
+        }
+    },
+    {
+        "type": "Invalid (Missing password)",
+        "inputs": {
+            "username": "NpsHDFVF",
+            "password": ""
+        }
+    },
+    {
+        "type": "Edge Case (Below minLength for username)",
+        "inputs": {
+            "username": "i5J",
+            "password": "mu89lA9N"
+        }
+    },
+    {
+        "type": "Edge Case (Above maxLength for username)",
+        "inputs": {
+            "username": "MCCo0sX4COHMJ0iQt5Uxz",
+            "password": "bxSZywaa"
+        }
+    },
+    {
+        "type": "Edge Case (Below minLength for password)",
+        "inputs": {
+            "username": "3WQO00vx",
+            "password": "ZpieMEn"
+        }
+    },
+    {
+        "type": "Edge Case (Above maxLength for password)",
+        "inputs": {
+            "username": "Lms2VEmv",
+            "password": "PrKKD8yLvheltvifyrx36of7BddLYRJ"
+        }
+    }
+]

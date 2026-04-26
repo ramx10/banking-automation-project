@@ -1,0 +1,30 @@
+{
+    "testName": "Basic Login Flow",
+    "steps": [
+        {
+            "action": "navigate",
+            "url": "http://localhost:3000/login"
+        },
+        {
+            "action": "input",
+            "locator_type": "id",
+            "locator_value": "username",
+            "data": "admin"
+        },
+        {
+            "action": "input",
+            "locator_type": "id",
+            "locator_value": "password",
+            "data": "password123"
+        },
+        {
+            "action": "click",
+            "locator_type": "id",
+            "locator_value": "login-btn"
+        },
+        {
+            "action": "verify_url",
+            "expected_url": "http://localhost:3000/dashboard"
+        }
+    ]
+}

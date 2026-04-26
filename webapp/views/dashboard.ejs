@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <i class="fa-solid fa-building-columns"></i> AI Bank
+            </div>
+            <div class="navbar-menu">
+                <a href="/loans" class="link" style="margin: 0; margin-right: 15px; text-decoration: none; color: var(--text-main); font-weight: 600;"><i class="fa-solid fa-file-invoice-dollar"></i> Loans</a>
+                <span style="font-weight: 500;">Hello, <%= username %></span>
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <form action="/logout" method="GET" style="margin: 0;">
+                    <button type="submit" class="btn-outline btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                </form>
+            </div>
+        </nav>
+
+        <div class="dashboard-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Balance Card -->
+                <div class="card balance-card" style="margin-bottom: 30px;">
+                    <p>Available Balance</p>
+                    <h1>$<%= balance.toFixed(2) %></h1>
+                    <a href="/transfer" class="btn-outline" style="color: white; border-color: rgba(255,255,255,0.5); display: inline-block;">
+                        <i class="fa-solid fa-paper-plane"></i> Send Money
+                    </a>
+                </div>
+
+                <!-- Analytics Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-chart-pie"></i> Analytics</h3>
+                    </div>
+                    <div style="position: relative; height: 250px; width: 100%;">
+                        <canvas id="balanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Transactions -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Transaction History</h3>
+                </div>
+                
+                <div class="transactions-list">
+                    <% 
+                        let totalSpent = 0;
+                        let totalReceived = 0;
+                        if (transactions && transactions.length > 0) { 
+                            transactions.forEach(function(tx) { 
+                                const isReceived = (tx.receiver_username === username);
+                                
+                                if(isReceived) totalReceived += tx.amount;
+                                else totalSpent += tx.amount;
+                    %>
+                        <div class="transaction-item">
+                            <div class="tx-info">
+                                <div class="tx-icon <%= isReceived ? 'received' : 'sent' %>">
+                                    <i class="fa-solid <%= isReceived ? 'fa-arrow-down' : 'fa-arrow-up' %>"></i>
+                                </div>
+                                <div class="tx-details">
+                                    <p><%= isReceived ? 'From: ID ' + tx.sender_id : 'To: ' + tx.receiver_username %></p>
+                                    <span><%= new Date(tx.timestamp).toLocaleString() %></span>
+                                </div>
+                            </div>
+                            <div class="tx-amount <%= isReceived ? 'received' : 'sent' %>">
+                                <%= isReceived ? '+' : '-' %>$<%= tx.amount.toFixed(2) %>
+                            </div>
+                        </div>
+                    <% 
+                            }); 
+                        } else { 
+                    %>
+                        <p style="color: var(--text-muted); text-align: center; padding: 20px 0;">No transactions yet.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Handling -->
+    <% if (typeof success !== 'undefined' && success) { %>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '<%= success %>',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        </script>
+    <% } %>
+
+    <script>
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // Check local storage or system preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Initialize Chart
+        const ctx = document.getElementById('balanceChart').getContext('2d');
+        const totalSpent = <%= typeof totalSpent !== 'undefined' ? totalSpent : 0 %>;
+        const totalReceived = <%= typeof totalReceived !== 'undefined' ? totalReceived : 0 %>;
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Total Sent', 'Total Received'],
+                datasets: [{
+                    data: [totalSpent, totalReceived],
+                    backgroundColor: [
+                        '#ef4444', // Danger red
+                        '#10b981'  // Success green
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: document.body.classList.contains('dark-mode') ? '#f9fafb' : '#1f2937'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
